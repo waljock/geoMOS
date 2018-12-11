@@ -12,22 +12,18 @@ library(shinythemes)
 
 filestring <- "C:/Users/HMA03468/Documents/R_Data/Git/geoShiny/DEALER_PIPE_GEO.xlsx"
 
-s <- read_excel(filestring)
-
-datedf <- file.info(filestring)
-datestring <- as.character(datedf$mtime)
-ds <- paste0("Last Update:  ", datestring)
+j <- read_excel(filestring)
 
 #s <- read_excel("/home/waljock/Projects/R_Projects/Data/DEALER_PIPE_GEO.xlsx")
-s$MODEL_YEAR <- as.character(s$MODEL_YEAR)
-grouped_Series <- unique(subset(s[c(5)],(s$MODEL_YEAR>="2018") & (s$ADI_DS_UNITS >= 1)))
-grouped_MY <- (unique(subset(s[c(1)],(s$MODEL_YEAR>="2018") & (s$ADI_DS_UNITS >= 1))))
-r <- data.frame(s[rep(row.names(s), s$ADI_DS_UNITS),])
+j$MODEL_YEAR <- as.character(j$MODEL_YEAR)
+grouped_Series <- unique(subset(j[c(5)],(s$MODEL_YEAR>="2018") & (j$ADI_DS_UNITS >= 1)))
+grouped_MY <- (unique(subset(j[c(1)],(j$MODEL_YEAR>="2018") & (j$ADI_DS_UNITS >= 1))))
 
+browser()
 
 
 # 
-ui <- bootstrapPage(
+bootstrapPage(
   tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
   
   absolutePanel(top = 10, right = 10,
@@ -42,11 +38,10 @@ ui <- bootstrapPage(
 )
   
 # Define server function
-
-server <- function(input, output, session) {
+function(input, output, session) {
   
 
-  filteredData <- reactive(data.frame((subset(r,(SERIES_CD==input$series) & (MODEL_YEAR == input$year)))))
+  filteredData <- reactive(data.frame((subset(j,(SERIES_CD==input$series) & (MODEL_YEAR == input$year)))))
   
   
  
@@ -66,5 +61,5 @@ server <- function(input, output, session) {
   
   
 
-shinyApp(ui = ui, server = server)               
+#shinyApp(ui = ui, server = server)               
   
