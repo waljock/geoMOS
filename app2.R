@@ -12,6 +12,8 @@ library(magrittr)
 
 #filestring <- "/home/waljock/Projects/R_Projects/Data/DEALER_PIPE_GEO.xlsx"
 
+#this is a test comment
+
 filestring <- "C:/Users/HMA03468/Documents/R_Data/Git/geoShiny/DEALER_PIPE_GEO.xlsx"
 
 j <- read_excel(filestring)
